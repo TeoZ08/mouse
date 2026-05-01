@@ -450,10 +450,16 @@
             );
 
             if (distance < 50) {
-              const boardRect = board.getBoundingClientRect();
-
-              activeLeaf.style.left = zoneRect.left - boardRect.left + "px";
-              activeLeaf.style.top = zoneRect.top - boardRect.top + "px";
+              // Encaixe preciso: usa a posição real da zona no tabuleiro,
+              // sem considerar o efeito visual de hover/scale.
+              activeLeaf.style.left =
+                zone.offsetLeft +
+                (zone.offsetWidth - activeLeaf.offsetWidth) / 2 +
+                "px";
+              activeLeaf.style.top =
+                zone.offsetTop +
+                (zone.offsetHeight - activeLeaf.offsetHeight) / 2 +
+                "px";
 
               activeLeaf.classList.add("snapped");
               zone.setAttribute("data-filled", "true");
